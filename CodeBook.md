@@ -1,54 +1,68 @@
-CodeBook for the tidy dataset
+Getting & Cleaning Data Course Project CodeBook
 
-Data source
+Dataset details
 
-This dataset is derived from the "Human Activity Recognition Using Smartphones Data Set" which was originally made avaiable here: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+Original Dataset Name: Human Activity Recognition Using Smartphones Data Set
+Dataset File Name: getdata-projectfiles-UCI HAR Dataset
+Dataset Download Link: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+Dataset Source: Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto. Smartlab - Non Linear Complex Systems Laboratory. Data can be found online on the UCI Machine Learning Repository
+Dataset description
 
-Feature Selection
+The Human Activity Recognition database was built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors. The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.
 
-I refer you to the README and features.txt files in the original dataset to learn more about the feature selection for this dataset. And there you will find the follow description:
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
 
-The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz.
+Data Set Characteristics	Number of Instances	Number of Attributes	Number of activities	Number of subjects
+Multivariate, Time-Series	10299	561	6	30
+The folder structure of the dataset is as follows
 
-Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag).
+		UCI HAR Dataset/                                                                                  
+   			|                                                                                               
+   			|---------- activity_labels.txt                                                                 
+   			|---------- features.txt                                                                        
+   			|---------- features_info.txt                                                                  
+   			|---------- README.txt                                                                  
+   			|---------- run_analysis.R ( you have to paste it here )                                                                   
+   			|                                                                                             
+   			|---------- test                                                                                
+   			|             |---------- Inertial Signals                                             
+   			|             |               |---------- Other Files...                               
+            |             |                                                   
+   			|             |---------- X_test.txt                                                   
+   			|             |---------- y_test.txt                                                  
+   			|             |---------- subject_test.txt                                            
+   			|                                                                                     
+   			|---------- train                                                                      
+   			              |---------- Inertial Signals                                            
+   			              |               |---------- Other Files...                            
+   			              |                                                                       
+   			              |---------- X_train.txt                                                
+   			              |---------- y_train.txt                                                 
+   			              |---------- subject_train.txt  
 
-Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals).
+A brief description of the data files are provided below.
 
-The reasoning behind my selection of features is that the assignment explicitly states "Extracts only the measurements on the mean and standard deviation for each measurement." To be complete, I included all variables having to do with mean or standard deviation.
+features_info.txt: Shows information about the variables used on the feature vector.
+features.txt: List of all feature names.
+activity_labels.txt: Links the activity class labels with their activity name.
+train/X_train.txt: Training set of all the 561 features. Features are normalized and bounded within [-1,1].
+train/y_train.txt: Training labels of activities. Range is from 1 to 6.
+test/X_test.txt: Test set of all the 561 features. Features are normalized and bounded within [-1,1].
+test/y_test.txt: Test labels of activities. Range is from 1 to 6.
+train/subject_train.txt: Each row identifies the subject who performed the activity for each window sample. Range is from 1 to 30.
+test/subject_test.txt: Each row identifies the subject who performed the activity for each window sample. Range is from 1 to 30.
+Dataset processing and transformation details
 
-In short, for this derived dataset, these signals were used to estimate variables of the feature vector for each pattern:
-'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+We used all the data files explained above for creating the tidy dataset. The explanation of how the script works is written in detail in README.md so do refer to it as and when needed. Here, we will dive down into the data and explain in detail how we processed and transformed the data into the final tidy dataset.
 
-tBodyAcc-XYZ
-tGravityAcc-XYZ
-tBodyAccJerk-XYZ
-tBodyGyro-XYZ
-tBodyGyroJerk-XYZ
-tBodyAccMag
-tGravityAccMag
-tBodyAccJerkMag
-tBodyGyroMag
-tBodyGyroJerkMag
-fBodyAcc-XYZ
-fBodyAccJerk-XYZ
-fBodyGyro-XYZ
-fBodyAccMag
-fBodyAccJerkMag
-fBodyGyroMag
-fBodyGyroJerkMag
-The set of variables that were estimated (and kept for this assignment) from these signals are:
-
-mean(): Mean value
-std(): Standard deviation
-Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
-
-gravityMean
-tBodyAccMean
-tBodyAccJerkMean
-tBodyGyroMean
-tBodyGyroJerkMean
-Other estimates have been removed for the purpose of this excercise.
-
-Note: features are normalized and bounded within [-1,1].
-
-The resulting variable names are of the following form: tbodyaccmeanx, which means the mean value of tBodyAcc-XYZ.
+First we combined the files X_train.txt and X_test.txt into the featureData data frame using the rbind command. This data frame has 10299 rows, where each row represents a case corresponding to a particular subject and 561 columns corresponding to the 561 features, where each is a particular measure.
+Next, we combined the files y_train.txt and y_test.txt into the activityLabels data frame using the rbind command. This data frame has 10299 rows and 1 column, where each row represents an activity done by a particular subject.
+Next, we combined the files subject_train.txt and subject_test.txt into the subjectLabels data frame using the rbind command. This data frame has 10299 rows and 1 column, where each row represents a particular person i.e., subject identifier.
+Then, we read in the feature names from the files features.txt and stores it in the featureNames vector with dimensions of 561 x 2. Where each row represents a particular feature consisting of a feature identifier and its corresponding feature name. We transform this into a 561 x 1 vector containing the feature names only and store it back into the featureNames vector.
+From the featureNames vector, we get the required feature indices using the grep command for features having both mean and std and store the indices in the reqdfeatureIndices vector of size 66 x 1 representing a total of 66 features. We use the gsub command to remove the () symbols from the variable names and also converted them to lower case following the conventions for variable names.
+Then, we read the different activity names corresponding to the activity identifiers from the activity_labels.txt file and transform the activity ids in the activityLabels data frame to form a new data frame activityData of size 10299 x 1 containing all the activity names. We also follow necessary naming conventions by removing underscores and transforming the names to lower case.
+Finally we combine the three dataframes, subjectLabels, activityData and featureData to form the data frame cleanData with dimensions 10299 x 68. This is the first required tidy data set and we write it to the files clean_data.csv and clean_data.txt both having the same content. The rows represent a particular case of a perticular subject.
+Next, we load the reshape2 package which will be required for creating the next tidy data set.
+Next, we set our identifier and measure variables as idVars and measureVars respectively and then we convert our cleanData data frame into a molten data frame meltedData with dimensions of 679734 x 4 using the melt function. The idVars contain subjectid and activityname because we will be using them as identifier variables while computing average of the remaining feature variables which are the measure variables here.
+Now, we decast our molten data frame into the required aggregated data frame where each feature is averaged per person ( subjectid ) per activity ( activityname ) using the dcast function, and we get our second required tidy data set tidyData which is a data frame having dimensions 180 x 68
+We write this tidy data set to the files tidy_data.csv and tidy_data.txt both having the same content. Here each row represents a case of a particular subject performing a particular activity and all the features corresponding to that person and activity are averaged.
