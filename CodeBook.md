@@ -22,10 +22,6 @@ The Human Activity Recognition database was built from the recordings of 30 subj
 
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
 
-Data Set Characteristics	Number of Instances	Number of Attributes	Number of activities	Number of subjects
-Multivariate, Time-Series	      10299	               561	                  6	                 30
-
-
 
 The folder structure of the dataset is as follows
 
@@ -56,13 +52,21 @@ The folder structure of the dataset is as follows
 A brief description of the data files are provided below.
 
 features_info.txt: Shows information about the variables used on the feature vector.
+
 features.txt: List of all feature names.
+
 activity_labels.txt: Links the activity class labels with their activity name.
+
 train/X_train.txt: Training set of all the 561 features. Features are normalized and bounded within [-1,1].
+
 train/y_train.txt: Training labels of activities. Range is from 1 to 6.
+
 test/X_test.txt: Test set of all the 561 features. Features are normalized and bounded within [-1,1].
+
 test/y_test.txt: Test labels of activities. Range is from 1 to 6.
+
 train/subject_train.txt: Each row identifies the subject who performed the activity for each window sample. Range is from 1 to 30.
+
 test/subject_test.txt: Each row identifies the subject who performed the activity for each window sample. Range is from 1 to 30.
 
 
